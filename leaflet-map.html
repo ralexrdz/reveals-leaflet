@@ -1,0 +1,47 @@
+<template id="leaflet-map-template">
+    <link rel="stylesheet" href="./bower_components/leaflet/dist/leaflet.css">
+    <div id="mapid" style="height: 500px"></div>
+        <!-- LEAFLET JS -->
+</template>
+<script src="./bower_components/leaflet/dist/leaflet.js"></script>
+<script>
+    class LeafletMap extends HTMLElement {
+        constructor () {
+            super();
+            let tmpl = document.currentScript.ownerDocument.querySelector('template')
+            let shadowRoot = this.attachShadow({mode: 'open'})
+            shadowRoot.appendChild(tmpl.content.cloneNode(true))
+
+            let mapDiv = this.shadowRoot.getElementById('mapid')
+            this.map = L.map(mapDiv).setView([19.39682052576622, -99.13478851318361], 13)
+            // this.setAttribute('map', map)
+            // Tiles de open street maps
+            //L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map)
+
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox.streets'
+            }).addTo(this.map)
+            let myIcon = L.icon({
+                iconUrl: './lentes.png',
+
+                iconSize:     [40, 40], // size of the icon
+                iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
+                tooltipAnchor: [20,0]
+            })
+            L.marker(
+                [19.418657758792698, -99.14065182209016],
+                {icon: myIcon}
+            ).bindTooltip('Ranchito').addTo(this.map)
+        }
+
+        resize() {
+            this.map.invalidateSize()
+        }
+    }
+    window.customElements.define('leaflet-map', LeafletMap)
+</script>
+    

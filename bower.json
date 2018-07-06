@@ -1,0 +1,22 @@
+{
+  "name": "reveals-leaflet",
+  "homepage": "https://github.com/ralexrdz/reveals-leaflet",
+  "authors": [
+    "Raul Rodriguez <ralex.rdz@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "hakimel/reveal.js#^3.6.0",
+    "leaflet": "^1.3.1"
+  }
+}

@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Conceptos</title>
+
+		<link rel="stylesheet" href="./bower_components/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="./bower_components/reveal.js/css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="./bower_components/reveal.js/lib/css/zenburn.css">
+
+        <link rel="import" href="./leaflet-map.html">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section data-state="map">
+                    <leaflet-map></leaflet-map>
+                </section>
+                <section>
+                    <section>
+                        <h1>How?</h1>
+                    </section>
+                    <section>
+                        <h4>Leaflet tiles afected by reveals styles</h4>
+                        <p>Avoid css interfierence by creating a web component</p>
+                        <a href="https://github.com/ralexrdz/reveals-leaflet/blob/master/leaflet-map.html">leaflet-map.html</a>
+                    </section>
+                    <section>
+                        <p>Import it like this</p>
+                        <a href=""></a>
+                        <div data-markdown>
+                            <script type="text/template">
+                            ```html
+                            <link rel="import" href="./leaflet-map.html">
+                            ```
+                            </script>
+                        </div>
+                        <p>Use it like this</p>
+                        <div data-markdown>
+                            <script type="text/template">
+                            ``` html
+                            <leaflet-map></leaflet-map>
+                            ```
+                            </script>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Map just loading first tile on top left corner</h4>
+                        <div data-markdown>
+                            <script type="text/template">                            
+    <section data-state="map">
+        <leaflet-map></leaflet-map>
+    </section>
+                            </script>
+                        </div>
+                        <div data-markdown>
+                            <script type="text/template">                            
+    // Leaflet map needs to resize when 
+    // transitioning from hidden to shown
+    Reveal.addEventListener( 'map', function() {
+        document.querySelector('leaflet-map').resize()
+    }, false )
+                            </script>
+                        </div>
+                    </section>
+                </section>
+			</div>
+		</div>
+
+		<script src="./bower_components/reveal.js/lib/js/head.min.js"></script>
+		<script src="./bower_components/reveal.js/js/reveal.js"></script>
+        
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				transition: 'zoom',
+				dependencies: [
+					{ src: './bower_components/reveal.js/plugin/markdown/marked.js' },
+					{ src: './bower_components/reveal.js/plugin/markdown/markdown.js' },
+					{ src: './bower_components/reveal.js/plugin/notes/notes.js', async: true },
+					{ src: './bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+            });   
+            
+            // Leaflet map needs to resize when transitioning from hidden to shown
+            Reveal.addEventListener( 'map', function() {
+                document.querySelector('leaflet-map').resize()
+            }, false )
+        </script>
+	</body>
+</html>
